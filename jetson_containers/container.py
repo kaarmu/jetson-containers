@@ -153,6 +153,10 @@ def build_container(name, packages, base=get_l4t_base(), build_flags='', simulat
 
     # tag the final container
     tag_container(container_name, name, simulate)
+
+    # tag as latest container
+    tag_idx = name.find(':')
+    tag_container(name, f'{name[:tag_idx]}:latest', simulate)
     
     # re-run tests on final container
     for package in packages:
